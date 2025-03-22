@@ -1,10 +1,11 @@
 <div class="group-container">
     <button (click)="addNewFieldGroup()" class="btn">Create New Group</button>
     <div cdkDropList (cdkDropListDropped)="drop($event)" class="group-list">
-        <div *ngFor="let group of fieldGroups; let i = index" cdkDrag class="group-item" [ngClass]="{'selectedGroup':group.selected}">
+        <div *ngFor="let group of fieldGroups; let i = index" cdkDrag class="group-item"
+            [ngClass]="{'selectedGroup':group.selected}">
             <mat-icon cdkDragHandle class="drag-handle">drag_indicator</mat-icon>
             <span (click)="selectedFieldGroup(group)">
-                {{ group?.groupName }}  
+                {{ group?.groupName }}
             </span>
             <mat-icon class="delete-icon" (click)="openDeleteDialog(group,i)">delete</mat-icon>
         </div>

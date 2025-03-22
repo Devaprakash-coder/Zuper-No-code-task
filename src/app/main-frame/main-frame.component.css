@@ -1,59 +1,62 @@
 .main-frame {
-    display: flex;
-    height: 100%;
-    background: #f4f4f4;
-    justify-content: space-between;
-  }
-  
-  .left-pane {
-    width: auto;
-    padding: 10px;
+  display: flex;
+  height: 100%;
+  background: #f4f4f4;
+  justify-content: space-between;
+}
+
+.left-pane {
+  width: auto;
+  padding: 10px;
+  background: #ffffff;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  box-shadow: 2px -2px 10px 0px #b8b8b8;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 30px;
+  text-align: center;
+  height: 90%;
+  overflow: scroll;
+  scrollbar-width: none;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .content-card-container {
     background: #ffffff;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    box-shadow: 2px -2px 10px 0px #b8b8b8;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 30px;
-    text-align: center;
-    height: 90%;
-    overflow: scroll;
-    scrollbar-width: none;
-    align-self: center;
+    border-radius: 4px;
+    box-shadow: 3px 3px 5px 0px #dbdbdb;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 25px;
     position: relative;
-    .content-card-container{
-      background: #ffffff;
-      border-radius: 4px;
-      box-shadow: 3px 3px 5px 0px #dbdbdb;
-      display: flex;
-      margin-bottom: 25px;
-      position: relative;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      height: 22%;
-      width: 57%;
-      min-height: 22%;
-      textarea{
-        max-width: 100%;
-        max-height: fit-content;
-        min-width: 100%;
-        min-height: 100%;
-      }
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 22%;
+    width: 57%;
+    min-height: 22%;
+
+    textarea {
+      max-width: 100%;
+      max-height: fit-content;
+      min-width: 100%;
+      min-height: 100%;
     }
   }
+}
 
-  .footer-btn{
-    position: absolute;
-    top: 0;
-    right: 25px;
-    button{
-      background-color: #FD5000;
+.footer-btn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+
+  button {
+    background-color: #FD5000;
     font-family: "Inter", Sans-serif;
     font-size: 12px;
     font-weight: 600;
@@ -64,124 +67,136 @@
     color: #ffffff;
     border: none;
     cursor: pointer;
-    }
-    button:hover{
-      box-shadow: 0px 1px 4px 2px #fd500099;
-    }
   }
 
-.element-left-icons{
+  button:hover {
+    box-shadow: 0px 1px 4px 2px #fd500099;
+  }
+}
+
+.element-left-icons {
   width: 10%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #ff8045a0;
-    cursor: grab;
-    color: #FD5000;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #ff8045a0;
+  cursor: grab;
+  color: #FD5000;
 }
-.elements{
-  width: 70%;
-    text-align: left;
-    display: flex;
-    align-items: self-start;
-    flex-direction: column;
-}
-  .element-right-icons{
-    display: flex;
-    flex-direction: column;
-    width: 10%;
-    align-items: center;
-    height: 100%;
-    justify-content: space-evenly;
-    mat-icon{
-      font-size: 17px;
-      cursor:pointer;
-      color: #FD5000;
-    }
-  }
 
-  /* mat-icon{
+.elements {
+  width: 70%;
+  text-align: left;
+  display: flex;
+  align-items: self-start;
+  flex-direction: column;
+}
+
+.element-right-icons {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  align-items: center;
+  height: 100%;
+  justify-content: space-evenly;
+
+  mat-icon {
+    font-size: 17px;
+    cursor: pointer;
+    color: #FD5000;
+  }
+}
+
+/* mat-icon{
     position: absolute;
     right: 25px;
     top: 10px;
     font-size: 18px;
   } */
 
-  .group-content{
-    width: 50%;
-      background: #ffffff;
-      height: 10%;
-      border-radius: 4px;
-      box-shadow: 3px 3px 5px 0px #dbdbdb;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 30px;
-      flex-direction: column;
-      margin-bottom: 25px;
-      position: relative;
-    input{
-      border: none;
-      font-size: 24px;
-      border-bottom: 2px black solid;
-      outline: none;
-      font-weight: bold;
-    }
-    .group-icons{
-      position: absolute;
-      right: 10px;
-      top: 15px;
-      mat-icon{
-        font-size: 20px;
-        color: #FD5000;
-        margin-right: 8px;
-        cursor: pointer;
-      }
-    }
-  }
+.group-content {
+  width: 50%;
+  background: #ffffff;
+  height: 10%;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px 0px #dbdbdb;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 30px;
+  flex-direction: column;
+  margin-bottom: 25px;
+  position: relative;
 
-  .form-elements{
-    width: 100%;
-    /* border: none; */
-    border-radius: 3px;
+  input {
+    border: none;
+    font-size: 24px;
+    border-bottom: 2px black solid;
     outline: none;
-    border: 1px solid #acaaaa;
-    padding: 5px;
-    margin-top: 10px;
-  }
-  .form-elements:hover{
-    box-shadow: 1px 1px 3px #bbbbbb;
+    font-weight: bold;
   }
 
-  .element-type-icon{
-    width: 30px;
-    height: 30px;
-    margin-right: 15px;
-    img{
-      width: 100%;
-      height: 100%;
+  .group-icons {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+
+    mat-icon {
+      font-size: 20px;
+      color: #FD5000;
+      margin-right: 8px;
+      cursor: pointer;
     }
   }
-  
-  .right-pane,.right-editor {
-    width: 20%;
-    padding: 10px;
-    background: #ffffff;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    box-shadow: 2px -2px 10px 0px #b8b8b8;
-    h3 {
-      margin-bottom: 10px;
-    }
-    
-    .elements-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    .element-item {
+}
+
+.form-elements {
+  width: 100%;
+  /* border: none; */
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #acaaaa;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.form-elements:hover {
+  box-shadow: 1px 1px 3px #bbbbbb;
+}
+
+.element-type-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.right-pane,
+.right-editor {
+  width: 20%;
+  padding: 10px;
+  background: #ffffff;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  box-shadow: 2px -2px 10px 0px #b8b8b8;
+  outline: none;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  .elements-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .element-item {
     display: flex !important;
     align-items: center !important;
     padding: 10px !important;
@@ -191,18 +206,19 @@
     border-radius: 5px;
     font-size: 12px;
     font-weight: 500;
-    }    
-    .drag-icon {
-      margin-right: 10px;
-      cursor: grab;
-    }
   }
 
-  .element-item:hover{
-    border:1px solid #FD5000 !important;
+  .drag-icon {
+    margin-right: 10px;
+    cursor: grab;
   }
+}
 
-  /* Ensures the dragged item retains its original look */
+.element-item:hover {
+  border: 1px solid #FD5000 !important;
+}
+
+/* Ensures the dragged item retains its original look */
 .cdk-drag-preview {
   background: white !important;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
@@ -210,12 +226,14 @@
   padding: 10px;
   display: flex;
   align-items: center;
-  opacity: 1 !important; /* Prevent transparency */
+  opacity: 1 !important;
+  /* Prevent transparency */
 }
 
 /* Placeholder where the dragged item was */
 .cdk-drag-placeholder {
-  opacity: 0.3 !important; /* Reduce transparency */
+  opacity: 0.3 !important;
+  /* Reduce transparency */
   background: #f0f0f0 !important;
   border: 1px dashed #ccc !important;
 }
@@ -225,7 +243,7 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.drop-content{
+.drop-content {
   width: 100%;
   height: 100%;
   display: flex;
@@ -235,50 +253,113 @@
   scrollbar-width: none;
 }
 
-.right-editor{
+.right-editor {
   position: absolute;
-    right: 0;
-    height: 97%;
+  right: 0;
+  height: 97%;
 }
 
-.editor-container{
+.editor-container {
   display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 30px;
-      padding: 10px;
-      .editor-fields{
-        display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 10px;
+
+  .editor-fields {
+    display: flex;
     flex-direction: column;
     gap: 10px;
-      }
-      .checkbox{
-        display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 10px;
-            accent-color: #FD5000;
-      }
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    accent-color: #FD5000;
+  }
 }
 
-.delete{
+.delete {
   color: red;
 }
 
-.text-input{
+.text-input {
   padding: 6px;
   border: none;
   border-bottom: 1px solid #FD5000;
   outline: none;
 }
 
-.element-header{
+.element-header {
   display: flex;
-    justify-content: space-between;
-    margin: 10px;
-  span{
+  justify-content: space-between;
+  margin: 10px;
+  span {
     font-weight: 400;
     color: red;
     cursor: pointer;
   }
 }
+
+input[type="checkbox"],input[type="radio"] {
+  accent-color: #FD5000;
+  box-shadow: none !important;
+  width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+  .group-content{
+    width: 85%;
+    top: 20px;
+    padding: 20px;
+    margin-bottom: 0;
+    h2{
+    font-size: 18px;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
+  .content .content-card-container{
+    width: 99%;
+    /* top: 42px; */
+  }
+  .footer-btn{
+    top: 5px;
+    right: 15px;
+    button{
+      font-size: 10px;
+      padding: 2px 18px;
+    }
+  }
+  .content{
+    gap: 50px;
+  }
+  .elements{
+    font-size: 12px;
+  }
+  .form-elements[_ngcontent-ng-c3293137146] {
+    width: 95%;
+  }
+  .element-right-icons{
+    align-items: start;
+  }
+  .right-pane{
+    width: 25%;
+    .element-item{
+      padding: 5px !important;
+      font-size: 11px;
+    }
+  }
+  .element-type-icon{
+    width: 25px;
+    height: 25px;
+  }
+}
+
+  @media (max-width: 480px) {
+    
+  }

@@ -3,11 +3,11 @@ import { CommonService } from '../common.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { DragDropModule, CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-drop';
+import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LeftPaneComponent } from '../left-pane/left-pane.component';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-popup.component';
 
 @Component({
@@ -29,23 +29,22 @@ export class MainFrameComponent {
   editEnabled: boolean = false;
 
   formElementsList = [
-    { name: 'Text Field', type: 'text',icon:'../../assets/text.png',placeholder:'Type Here...',mandatory:false,readOnly:false },
-    { name: 'Textarea', type: 'textarea',icon:'../../assets/text desc.png',placeholder:'Type Here...',mandatory:false,readOnly:false  },
-    { name: 'Date', type: 'date',icon:'../../assets/calendar.png',placeholder:'Type Here...',mandatory:false,readOnly:false },
-    { name: 'Time', type: 'time',icon:'../../assets/clock.png',placeholder:'Type Here...',mandatory:false,readOnly:false  },
-    { name: 'Date & Time', type: 'datetime-local',icon:'../../assets/date-time.png',mandatory:false,readOnly:false },
-    { name: 'Dropdown', type: 'select',icon:'../../assets/drop-down.png',mandatory:false,readOnly:false },
-    { name: 'Radio Button', type: 'radio',icon:'../../assets/radio.png',mandatory:false,readOnly:false  },
-    { name: 'Checkbox', type: 'checkbox',icon:'../../assets/checkbox.png',mandatory:false,readOnly:false  },
-    { name: 'File Upload', type: 'file',icon:'../../assets/calendar.png',mandatory:false,readOnly:false  }
+    { name: 'Text Field', type: 'text', icon: '../../assets/text.png', placeholder: 'Type Here...', mandatory: false, readOnly: false },
+    { name: 'Textarea', type: 'textarea', icon: '../../assets/text desc.png', placeholder: 'Type Here...', mandatory: false, readOnly: false },
+    { name: 'Date', type: 'date', icon: '../../assets/calendar.png', placeholder: 'Type Here...', mandatory: false, readOnly: false },
+    { name: 'Time', type: 'time', icon: '../../assets/clock.png', placeholder: 'Type Here...', mandatory: false, readOnly: false },
+    { name: 'Date & Time', type: 'datetime-local', icon: '../../assets/date-time.png', mandatory: false, readOnly: false },
+    { name: 'Dropdown', type: 'select', icon: '../../assets/drop-down.png', placeholder: 'Select an option', mandatory: false, readOnly: false },
+    { name: 'Radio Button', type: 'radio', icon: '../../assets/radio.png', mandatory: false, readOnly: false },
+    { name: 'Checkbox', type: 'checkbox', icon: '../../assets/checkbox.png', mandatory: false, readOnly: false },
+    { name: 'File Upload', type: 'file', icon: '../../assets/calendar.png', mandatory: false, readOnly: false }
   ];
 
   @ViewChild('rightDrawer') rightDrawer!: MatDrawer;
   @ViewChild('elementEditorDrawer') elementEditorDrawer!: MatDrawer;
-  panelOpenState:boolean = true;
-  selectedElement:any;
+  selectedElement: any;
 
-  constructor(private commonService: CommonService,private dialog:MatDialog) {}
+  constructor(private commonService: CommonService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.commonService.selectedGroup.subscribe(res => {
@@ -62,44 +61,42 @@ export class MainFrameComponent {
     }
   }
 
-  openElementEditor(element:any){
-    this.rightDrawer.close()
+  openElementEditor(element: any) {
     this.elementEditorDrawer.open()
     this.selectedElement = element;
   }
 
-  closeEditor(){
+  closeEditor() {
     this.elementEditorDrawer.close()
-    this.rightDrawer.open()
   }
 
-  copyElement(element:any){
+  copyElement(element: any) {
     this.selectedGroup.formElementsList.push(element)
   }
 
-  openDeleteDialog(element: any,type:string,index?: number) {
+  openDeleteDialog(element: any, type: string, index?: number) {
     let title = element.name || element.groupName;
     const dialogRef = this.dialog.open(ConfirmationPopupComponent, {
       width: 'auto',
       data: { name: title }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result && type =='deleteElement') {
+      if (result && type == 'deleteElement') {
         this.selectedGroup.formElementsList.splice(index, 1);
       }
-      else if(result && type =='deleteGroup'){
-        console.log("this",this.selectedGroup)
+      else if (result && type == 'deleteGroup') {
+        console.log("this", this.selectedGroup)
         this.selectedGroup = null
       }
     });
   }
 
-  copyGroup(group:any){
-    console.log("group",group)
+  copyGroup(group: any) {
+    console.log("group", group)
     this.commonService.copiedGroup.next(group)
   }
 
-  saveForm(){
+  saveForm() {
     this.commonService.saveToLocalStorage();
   }
 

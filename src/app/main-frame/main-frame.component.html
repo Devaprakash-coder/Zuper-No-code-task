@@ -18,20 +18,36 @@
     </div>
     <div class="drop-content" cdkDropList (cdkDropListDropped)="drop($event)" id="mainFrame">
       <div *ngFor="let element of selectedGroup?.formElementsList;let i=index" cdkDrag class="content-card-container">
-        <div class="element-left-icons"cdkDragHandle>
+        <div class="element-left-icons" cdkDragHandle>
           <mat-icon>drag_indicator</mat-icon>
         </div>
-        <div class="elements" *ngIf="element.type != 'textarea'">
+        <div class="elements" *ngIf="element.type != 'textarea' && element.type != 'select'">
           <div>
             <span>{{ element.name }}</span>
             <span *ngIf="element.mandatory" style="color: red;margin-left:5px;">*</span>
           </div>
-          <input class="form-elements" [type]="element.type" [placeholder]="element?.placeholder" [required]="element.mandatory" [readonly]="element.readOnly">
+          <input class="form-elements" [type]="element.type" [placeholder]="element?.placeholder"
+            [required]="element.mandatory" [readonly]="element.readOnly">
         </div>
         <div class="elements" *ngIf="element.type == 'textarea'">
-          <span>{{ element.name }}</span>
+          <div>
+            <span>{{ element.name }}</span>
+            <span *ngIf="element.mandatory" style="color: red;margin-left:5px;">*</span>
+          </div>
           <textarea class="form-elements" [placeholder]="element?.placeholder">
           </textarea>
+        </div>
+        <div class="elements" *ngIf="element.type == 'select'">
+          <div>
+            <span>{{ element.name }}</span>
+            <span *ngIf="element.mandatory" style="color: red;margin-left:5px;">*</span>
+          </div>
+            <select class="form-elements">
+              <option value="" disabled selected>{{element.placeholder}}</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
         </div>
         <div class="element-right-icons">
           <mat-icon (click)="openElementEditor(element)">mode_edit</mat-icon>
@@ -79,6 +95,4 @@
       </div>
     </div>
   </mat-drawer>
-  <!-- <app-right-pane class="right-pane" (elementDropped)="onElementDropped($event)"></app-right-pane> -->
-  
 </div>

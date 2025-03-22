@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs'
+import { Subject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-selectedGroup = new Subject()
-copiedGroup = new Subject()
-fieldGroups = [{ groupName: 'Default Group',groupDesc:"", selected: false,formElementsList:[] }];
+  selectedGroup = new Subject();
+  copiedGroup = new Subject();
+  fieldGroups = [{ groupName: 'Default Group', groupDesc: "", selected: false, formElementsList: [] }];
 
-  constructor() { 
+  constructor() {
     let storedGroup = localStorage.getItem("formFields");
-    if(storedGroup){
+    if (storedGroup) {
       this.fieldGroups = JSON.parse(storedGroup as string);
     }
   }
