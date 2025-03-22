@@ -1,0 +1,10 @@
+<div class="right-pane">
+    <h3>Form Elements</h3>
+
+    <div cdkDropList #rightPaneList="cdkDropList" class="elements-container">
+        <div *ngFor="let element of formElements" cdkDrag class="element-item">
+            <mat-icon class="drag-icon" cdkDragHandle>drag_indicator</mat-icon>
+            {{ element.name }}
+        </div>
+    </div>
+</div>

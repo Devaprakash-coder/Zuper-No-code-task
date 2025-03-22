@@ -1,0 +1,84 @@
+<div class="main-frame">
+  <app-left-pane class="left-pane"></app-left-pane>
+  <div class="content" *ngIf="selectedGroup">
+    <div class="group-content">
+      <div class="group-icons">
+        <mat-icon (click)="editEnabled = !editEnabled">mode_edit</mat-icon>
+        <mat-icon (click)="copyGroup(selectedGroup)">content_copy</mat-icon>
+        <mat-icon class="delete" (click)="openDeleteDialog(selectedGroup,'deleteGroup')">delete</mat-icon>
+      </div>
+      <div class="content-card" *ngIf="!editEnabled">
+        <h2>{{selectedGroup.groupName}}</h2>
+        <p>Add Description...</p>
+      </div>
+      <div class="content-card" *ngIf="editEnabled">
+        <h2><input type="text" [(ngModel)]="selectedGroup.groupName" name="" id=""></h2>
+        <input type="text" [(ngModel)]="selectedGroup.groupDesc" name="" id="">
+      </div>
+    </div>
+    <div class="drop-content" cdkDropList (cdkDropListDropped)="drop($event)" id="mainFrame">
+      <div *ngFor="let element of selectedGroup?.formElementsList;let i=index" cdkDrag class="content-card-container">
+        <div class="element-left-icons"cdkDragHandle>
+          <mat-icon>drag_indicator</mat-icon>
+        </div>
+        <div class="elements" *ngIf="element.type != 'textarea'">
+          <div>
+            <span>{{ element.name }}</span>
+            <span *ngIf="element.mandatory" style="color: red;margin-left:5px;">*</span>
+          </div>
+          <input class="form-elements" [type]="element.type" [placeholder]="element?.placeholder" [required]="element.mandatory" [readonly]="element.readOnly">
+        </div>
+        <div class="elements" *ngIf="element.type == 'textarea'">
+          <span>{{ element.name }}</span>
+          <textarea class="form-elements" [placeholder]="element?.placeholder">
+          </textarea>
+        </div>
+        <div class="element-right-icons">
+          <mat-icon (click)="openElementEditor(element)">mode_edit</mat-icon>
+          <mat-icon (click)="copyElement(element)">content_copy</mat-icon>
+          <mat-icon class="delete" (click)="openDeleteDialog(element,'deleteElement',i)">delete</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="footer-btn">
+      <button (click)="saveForm()">Save</button>
+    </div>
+  </div>
+  <div *ngIf="!selectedGroup">
+    <h3>Select a group to add elements</h3>
+  </div>
+  <mat-drawer #rightDrawer opened autosize mode="over" position="end" class="right-pane">
+    <h3 style="margin: 15px;">Form Elements</h3>
+    <div cdkDropList class="elements-container" cdkDropListConnectedTo="mainFrame">
+      <div cdkDrag *ngFor="let element of formElementsList" class="element-item">
+        <div *ngIf="element.icon" class="element-type-icon">
+          <img [src]="element.icon" [alt]="element.icon">
+        </div>
+        {{ element.name }}
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer #elementEditorDrawer autosize mode="over" position="end" class="right-editor">
+    <h3 class="element-header">Element Editor <span (click)="closeEditor()">x</span></h3>
+    <div *ngIf="selectedElement" class="editor-container">
+      <div class="editor-fields">
+        <label for="fieldName">Field Name :</label>
+        <input type="text" name="fieldName" id="" [(ngModel)]="selectedElement.name" class="text-input">
+      </div>
+      <div class="editor-fields">
+        <label for="placeHolder">Placeholder :</label>
+        <input type="text" name="placeHolder" id="" [(ngModel)]="selectedElement.placeholder" class="text-input">
+      </div>
+      <div class="checkbox">
+        <label for="mandatory">Mandatory :</label>
+        <input type="checkbox" name="mandatory" id="" [(ngModel)]="selectedElement.mandatory">
+      </div>
+      <div class="checkbox">
+        <label for="readOnly">Read Only :</label>
+        <input type="checkbox" name="readOnly" id="" [(ngModel)]="selectedElement.readOnly">
+      </div>
+    </div>
+  </mat-drawer>
+  <!-- <app-right-pane class="right-pane" (elementDropped)="onElementDropped($event)"></app-right-pane> -->
+  
+</div>
