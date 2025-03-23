@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!selectedGroup" style="align-self: center;">
+    <div *ngIf="!selectedGroup" style="align-self: center;" class="no-data">
       <h3>Select a group to add elements</h3>
     </div>
     <mat-drawer #rightDrawer opened autosize mode="over" position="end" class="right-pane">
@@ -72,7 +72,7 @@
           <div *ngIf="element.icon" class="element-type-icon">
             <img [src]="element.icon" [alt]="element.icon">
           </div>
-          {{ element.name }}
+          <span>{{ element.name }}</span>
         </div>
       </div>
     </mat-drawer>
@@ -146,7 +146,7 @@
         <div *ngIf="element.icon" class="element-type-icon">
           <img [src]="element.icon" [alt]="element.icon">
         </div>
-        {{ element.name }}
+        <span>{{ element.name }}</span>
       </div>
     </div>
   </mat-drawer>
