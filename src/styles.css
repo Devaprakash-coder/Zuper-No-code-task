@@ -14,6 +14,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding: 5px 15px;
     color: #ffffff;
     border: none;
+    cursor: pointer;
   }
 
 .btn:hover {
@@ -50,4 +51,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .mdc-switch__track::before {
     border: none;
   }
+
+  
+.ellipsis{
+  width: 200px !important;
+    overflow: hidden;
+    height: unset !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width: 768px) {
+  .ellipsis {
+    width: 150px !important;
+  }
+}
   
