@@ -33,3 +33,6 @@ The application will be available at http://localhost:4200/.
 
 ng build --configuration=production
 This will generate a dist/ folder with the production-ready build.
+
+**live page**
+https://zuper-no-code-task.netlify.app/
