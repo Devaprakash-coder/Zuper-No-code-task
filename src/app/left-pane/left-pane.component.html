@@ -7,7 +7,7 @@
             <p class="ellipsis" (click)="selectedFieldGroup(group)">
                 {{ group?.groupName }}
             </p>
-            <mat-icon class="delete-icon" (click)="openDeleteDialog(group,i)">delete</mat-icon>
+            <mat-icon class="delete-icon" (click)="openDeleteDialog(group,group.id)">delete</mat-icon>
         </div>
     </div>
 </div>

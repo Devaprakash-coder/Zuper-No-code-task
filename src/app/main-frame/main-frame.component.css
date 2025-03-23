@@ -379,10 +379,15 @@ input[type="radio"] {
   .no-data{
     height: 100%;
   }
-  .right-pane {
+  .right-pane,.right-editor {
     width: 100%;
     position: relative;
     height: 35%;
+  }
+  .right-editor{
+    height: 100%;
+    width: 95%;
+    position: absolute;
   }
   .element-type-icon{
     width: 20px;
@@ -433,6 +438,10 @@ input[type="radio"] {
     p {
       font-size: 12px;
     }
+
+    input{
+      font-size: 15px;
+    }
   }
 
   .content .content-card-container {
@@ -465,7 +474,7 @@ input[type="radio"] {
     align-items: start;
   }
 
-  .right-pane {
+  .right-pane,.right-editor {
     width: 25%;
 
     .element-item {

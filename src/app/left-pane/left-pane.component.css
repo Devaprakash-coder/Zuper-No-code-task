@@ -32,6 +32,8 @@
   p{
     width: 100%;
     text-align: center;
+    margin: 0;
+    padding: 15px 0px;
     /* height: 100%; */
     display: flex;
     align-items: center;
@@ -62,6 +64,11 @@
 .selectedGroup {
   outline: 2px solid #FD5000 !important;
   background: #ffb18d5e !important;
+}
+
+.disabled{
+  color: #ffb3b3;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

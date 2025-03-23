@@ -53,8 +53,9 @@ export class MainFrameComponent {
 
   ngOnInit() {
     this.commonService.selectedGroup.subscribe(group => {
-      this.selectedGroup = group;
       if (group) {
+        this.selectedGroup = group;
+        this.editEnabled = false;
         this.formElements = group.get('formElementsList') as FormArray;
       }
     });
@@ -108,6 +109,7 @@ export class MainFrameComponent {
       if(result){
         if (type === 'deleteElement' && typeof index === 'number') {
           this.removeField(index)
+          this.closeEditor()
         }
         else if (type === 'deleteGroup' && this.selectedGroup) {
           this.selectedGroup.patchValue({ selected: false });
