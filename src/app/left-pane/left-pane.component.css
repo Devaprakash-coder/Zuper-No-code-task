@@ -79,3 +79,28 @@
     font-size: 10px;
   }
 }
+
+@media (max-width: 480px) {  
+  .group-container {
+    width: 100% !important;
+    height: 100%;
+  }
+
+  .group-list {
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+    height: 75%;
+    flex-direction: row !important;
+        overflow-y: scroll;
+        width: 100%;
+        scrollbar-width: none;
+        padding-left: 10px;
+  }
+  .group-item{
+    height: 35px;
+    p{
+      width: 80px !important;
+    }
+  }
+}
