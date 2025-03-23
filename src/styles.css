@@ -2,3 +2,52 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn {
+    background-color: #FD5000;
+    font-family: "Inter", Sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 26px;
+    border-radius: 7px 7px 7px 7px;
+    padding: 5px 15px;
+    color: #ffffff;
+    border: none;
+  }
+
+.btn:hover {
+    box-shadow: 0px 1px 4px 2px #fd500099;
+  }
+  
+  .btn:disabled {
+    background-color: #ccc;
+  }
+
+.mdc-switch__track {
+    width: 44px !important;
+    height: 10px !important;
+  }
+  
+  .mdc-switch--selected .mdc-switch__track::after {
+    background: #FD5000 !important;
+  }
+  
+  .mdc-switch__handle {
+    height: 20px !important;
+    width: 20px !important;
+  }
+  .mdc-switch__track::before, .mdc-switch__track::after {
+    border: none;
+  }
+  .mdc-switch__track::before{
+    border: none !important;
+  }
+  .mdc-switch:enabled:hover:not(:focus):not(:active) .mdc-switch__track::after {
+    background: #FD5000 !important;
+  }
+  
+  .mdc-switch__track::before {
+    border: none;
+  }
+  

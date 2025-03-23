@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs'
+import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  selectedGroup = new Subject();
-  copiedGroup = new Subject();
+  selectedGroup = new BehaviorSubject<FormGroup | null>(null);
+  copiedGroup = new BehaviorSubject<FormGroup | null>(null);
   fieldGroups = [{ groupName: 'Default Group', groupDesc: "", selected: false, formElementsList: [] }];
 
   constructor() {
