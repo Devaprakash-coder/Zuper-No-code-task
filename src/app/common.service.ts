@@ -7,7 +7,7 @@ import { BehaviorSubject, Subject } from 'rxjs'
 })
 export class CommonService {
   selectedGroup = new BehaviorSubject<FormGroup | null>(null);
-  copiedGroup = new BehaviorSubject<FormGroup | null>(null);
+  copiedGroup = new Subject<FormGroup | null>();
   fieldGroups = [{ groupName: 'Default Group', groupDesc: "", selected: false, formElementsList: [] }];
 
   constructor() {

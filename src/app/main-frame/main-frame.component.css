@@ -58,7 +58,7 @@
   align-items: center;
   position: relative;
   top: 30px;
-
+  text-align: left;
   .content-card-container {
     background: #ffffff;
     border-radius: 4px;
@@ -72,7 +72,6 @@
     height: 22%;
     width: 57%;
     min-height: 22%;
-
     textarea {
       max-width: 100%;
       max-height: fit-content;
@@ -160,11 +159,11 @@
   flex-direction: column;
   margin-bottom: 25px;
   position: relative;
-
   input {
+    width: 100%;
     border: none;
     font-size: 24px;
-    border-bottom: 2px black solid;
+    border-bottom: 2px #fd5000 solid;
     outline: none;
     font-weight: bold;
   }
@@ -398,6 +397,10 @@ input[type="radio"] {
       padding: 5px !important;
       font-size: 11px;
     }
+  }
+
+  .header-btn{
+    right: 32%;
   }
 
   .element-type-icon {
