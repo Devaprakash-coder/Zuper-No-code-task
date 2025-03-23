@@ -139,13 +139,6 @@
   }
 }
 
-/* mat-icon{
-    position: absolute;
-    right: 25px;
-    top: 10px;
-    font-size: 18px;
-  } */
-
 .group-content {
   width: 50%;
   background: #ffffff;
@@ -249,7 +242,6 @@
   border: 1px solid #FD5000 !important;
 }
 
-/* Ensures the dragged item retains its original look */
 .cdk-drag-preview {
   background: white !important;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
@@ -258,18 +250,14 @@
   display: flex;
   align-items: center;
   opacity: 1 !important;
-  /* Prevent transparency */
 }
 
-/* Placeholder where the dragged item was */
 .cdk-drag-placeholder {
   opacity: 0.3 !important;
-  /* Reduce transparency */
   background: #f0f0f0 !important;
   border: 1px dashed #ccc !important;
 }
 
-/* Smooth animation when dragging */
 .cdk-drag-animating {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

@@ -132,12 +132,6 @@ export class LeftPaneComponent {
     });
   }
 
-  // selectedFieldGroup(group: any) {
-  //   this.fieldGroups.map(group => group.selected = false)
-  //   group.selected = true;
-  //   this.commonService.selectedGroup.next(group)
-  // }
-
   selectedFieldGroup(groupData: any) {
     this.setAllSelectedFalse();
     let selectedGroup = this.fieldGroupsArray.controls.find(group => group.value.id === groupData.id);
