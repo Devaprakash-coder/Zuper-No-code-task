@@ -3,7 +3,7 @@
     <mat-slide-toggle [(ngModel)]="isPreviewMode">Preview Mode</mat-slide-toggle>
   </div>
   <div class="main-frame" *ngIf="!isPreviewMode">
-    <app-left-pane class="left-pane"></app-left-pane>
+    <app-left-pane class="left-pane" (groupDeleted)="mainGroupDeleted($event)"></app-left-pane>
     <div class="content" *ngIf="selectedGroup">
       <div class="group-content">
         <div class="group-icons">
