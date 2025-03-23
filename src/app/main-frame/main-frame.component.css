@@ -397,6 +397,7 @@ input[type="radio"] {
   }
   .content{
     width: 80%;
+    top:0px;
     .content-card-container{
       width: 100% !important;
           height: 100% !important;
