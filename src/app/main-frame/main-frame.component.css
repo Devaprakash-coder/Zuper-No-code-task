@@ -433,6 +433,10 @@ input[type="radio"] {
     p {
       font-size: 12px;
     }
+
+    input{
+      font-size: 15px;
+    }
   }
 
   .content .content-card-container {
