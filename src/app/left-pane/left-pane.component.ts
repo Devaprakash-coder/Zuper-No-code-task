@@ -24,6 +24,33 @@ export class LeftPaneComponent {
     this.initializeForm();
   }
 
+  ngOnInit() {
+    this.formGroup.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe((value) => {
+      this.fieldGroups = value.fieldGroups;
+      this.setValueInLocal(value)
+      this.isButtonClicked = false;
+    })
+
+    this.commonService.copiedGroup.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe((group) => {
+      if (group) {
+        this.fieldGroupsArray.push(group)
+      }
+    })
+    // this.fieldGroups = this.commonService.fieldGroups;
+    // this.commonService.copiedGroup.subscribe((res: any) => {
+    //   let copiedGroup = { ...res }
+    //   copiedGroup.selected = false;
+    //   copiedGroup.groupName = copiedGroup.groupName + " " + 'Copy'
+    //   this.fieldGroups.push(copiedGroup)
+    // });
+  }
+
   initializeForm() {
     let localFormGroup = JSON.parse(localStorage.getItem('formValue') as string);
     if (localFormGroup && localFormGroup.fieldGroups) {
@@ -55,7 +82,6 @@ export class LeftPaneComponent {
       });
     }
     this.fieldGroups = this.formGroup.value.fieldGroups;
-    console.log("this.formGroup", this.formGroup);
   }
 
   createFieldGroup(data: any): FormGroup {
@@ -68,34 +94,6 @@ export class LeftPaneComponent {
         data.formElementsList?.map((el: any) => this.fb.group(el)) || []
       )
     });
-  }
-
-
-  ngOnInit() {
-    this.formGroup.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe((value) => {
-      this.fieldGroups = value.fieldGroups;
-      this.setValueInLocal(value)
-      this.isButtonClicked = false;
-    })
-
-    this.commonService.copiedGroup.pipe(
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe((group) => {
-      if (group) {
-        this.fieldGroupsArray.push(group)
-      }
-    })
-    // this.fieldGroups = this.commonService.fieldGroups;
-    // this.commonService.copiedGroup.subscribe((res: any) => {
-    //   let copiedGroup = { ...res }
-    //   copiedGroup.selected = false;
-    //   copiedGroup.groupName = copiedGroup.groupName + " " + 'Copy'
-    //   this.fieldGroups.push(copiedGroup)
-    // });
   }
 
   setValueInLocal(value: any) {
@@ -119,15 +117,18 @@ export class LeftPaneComponent {
     this.fieldGroupsArray.push(newFieldGroup)
   }
 
-  openDeleteDialog(element: any, index: number) {
-    if (index <= 0) return
+  openDeleteDialog(element: any, id: number) {
     const dialogRef = this.dialog.open(ConfirmationPopupComponent, {
       width: 'auto',
       data: { name: element.groupName }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.fieldGroupsArray.removeAt(index)
+        let index = this.fieldGroups.findIndex(group => group.id === id);
+        if (index !== -1) {
+          this.fieldGroups.splice(index, 1);
+          this.fieldGroupsArray.removeAt(index);
+        }
       }
     });
   }
@@ -147,6 +148,7 @@ export class LeftPaneComponent {
 
   drop(event: CdkDragDrop<any[]>) {
     moveItemInArray(this.fieldGroups, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.fieldGroupsArray.controls, event.previousIndex, event.currentIndex);
   }
 
 }
