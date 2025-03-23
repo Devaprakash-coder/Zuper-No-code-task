@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +19,7 @@ export class LeftPaneComponent {
   selectedGroup: any;
   formGroup!: FormGroup<any>;
   isButtonClicked: boolean = false;
+  @Output() groupDeleted = new EventEmitter();
 
   constructor(private commonService: CommonService, private dialog: MatDialog, private fb: FormBuilder) {
     this.initializeForm();
@@ -128,6 +129,7 @@ export class LeftPaneComponent {
         if (index !== -1) {
           this.fieldGroups.splice(index, 1);
           this.fieldGroupsArray.removeAt(index);
+          this.groupDeleted.emit(true)
         }
       }
     });

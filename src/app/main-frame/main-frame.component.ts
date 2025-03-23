@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LeftPaneComponent } from '../left-pane/left-pane.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-popup.component';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-main-frame',
@@ -65,12 +65,12 @@ export class MainFrameComponent {
     console.log("dropped");
     moveItemInArray(this.formElements.controls, event.previousIndex, event.currentIndex);
     if (event.previousContainer !== event.container) {
-        const draggedElement = this.formElementsList[event.previousIndex];
-        this.formElements.push(this.createFormGroup(draggedElement));
+      const draggedElement = this.formElementsList[event.previousIndex];
+      this.formElements.push(this.createFormGroup(draggedElement));
     }
   }
 
-  createFormGroup(element:any) {
+  createFormGroup(element: any) {
     return this.fb.group({
       name: [element.name],
       type: [element.type],
@@ -106,12 +106,13 @@ export class MainFrameComponent {
       data: { name: title }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         if (type === 'deleteElement' && typeof index === 'number') {
           this.removeField(index)
           this.closeEditor()
         }
         else if (type === 'deleteGroup' && this.selectedGroup) {
+          this.closeEditor()
           this.selectedGroup.patchValue({ selected: false });
           this.selectedGroup = null;
         }
@@ -130,7 +131,10 @@ export class MainFrameComponent {
     });
     this.commonService.copiedGroup.next(copiedGroup);
   }
-
+  mainGroupDeleted(event: any) {
+    this.selectedGroup = null;
+    this.closeEditor()
+  }
   ngOnDestroy() {
     this.commonService.selectedGroup.unsubscribe();
   }
