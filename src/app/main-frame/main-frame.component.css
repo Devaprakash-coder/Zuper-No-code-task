@@ -3,7 +3,38 @@
   height: 100%;
   background: #f4f4f4;
   justify-content: space-between;
+  overflow: hidden;
 }
+
+.header-btn {
+  position: absolute;
+  right: 23%;
+  top: 12px;
+
+  .btn {
+    background: transparent;
+    border: 1px solid #FD5000;
+    color: #FD5000;
+  }
+}
+
+.preview-toggle {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+
+.preview-mode {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.edit-mode {
+  padding: 20px;
+}
+
 
 .left-pane {
   width: auto;
@@ -26,6 +57,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  top: 30px;
 
   .content-card-container {
     background: #ffffff;
@@ -296,6 +328,7 @@
   display: flex;
   justify-content: space-between;
   margin: 10px;
+
   span {
     font-weight: 400;
     color: red;
@@ -303,63 +336,107 @@
   }
 }
 
-input[type="checkbox"],input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   accent-color: #FD5000;
   box-shadow: none !important;
   width: 20px;
-    height: 20px;
+  height: 20px;
 }
 
 @media (max-width: 768px) {
-  .group-content{
+  .group-content {
     width: 85%;
     top: 20px;
     padding: 20px;
     margin-bottom: 0;
-    h2{
-    font-size: 18px;
+
+    h2 {
+      font-size: 18px;
     }
-    p{
+
+    p {
       font-size: 12px;
     }
   }
-  .content .content-card-container{
+
+  .content .content-card-container {
     width: 99%;
     /* top: 42px; */
   }
-  .footer-btn{
+
+  .footer-btn {
     top: 5px;
     right: 15px;
-    button{
+
+    button {
       font-size: 10px;
       padding: 2px 18px;
     }
   }
-  .content{
+
+  .content {
     gap: 50px;
   }
-  .elements{
+
+  .elements {
     font-size: 12px;
   }
+
   .form-elements[_ngcontent-ng-c3293137146] {
     width: 95%;
   }
-  .element-right-icons{
+
+  .element-right-icons {
     align-items: start;
   }
-  .right-pane{
+
+  .right-pane {
     width: 25%;
-    .element-item{
+
+    .element-item {
       padding: 5px !important;
       font-size: 11px;
     }
   }
-  .element-type-icon{
+
+  .element-type-icon {
     width: 25px;
     height: 25px;
   }
 }
 
-  @media (max-width: 480px) {
-    
+@media (max-width: 480px) {}
+
+.previewMode {
+  .content {
+    top: 50px;
   }
+
+  .group-content {
+    width: 75%;
+    height: auto;
+    align-items: center;
+
+    input {
+      width: 100%;
+      border-radius: 3px;
+      outline: none;
+      border: 1px solid #acaaaa;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+
+  .drop-content {
+    align-items: start;
+    gap: 15px;
+    overflow-y: scroll;
+  }
+
+  .elements {
+    width: unset;
+  }
+}

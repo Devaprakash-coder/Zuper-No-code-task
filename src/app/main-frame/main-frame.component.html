@@ -1,4 +1,4 @@
-<div class="main-frame">
+<!-- <div class="main-frame">
   <app-left-pane class="left-pane"></app-left-pane>
   <div class="content" *ngIf="selectedGroup">
     <div class="group-content">
@@ -95,4 +95,159 @@
       </div>
     </div>
   </mat-drawer>
+</div> -->
+
+<div style="height: 100%;position: relative;">
+  <div class="header-btn preview-toggle">
+    <mat-slide-toggle [(ngModel)]="isPreviewMode">Preview Mode</mat-slide-toggle>
+  </div>
+  <div class="main-frame" *ngIf="!isPreviewMode">
+    <app-left-pane class="left-pane"></app-left-pane>
+    <div class="content" *ngIf="selectedGroup">
+      <div class="group-content">
+        <div class="group-icons">
+          <mat-icon (click)="editEnabled = !editEnabled">mode_edit</mat-icon>
+          <mat-icon (click)="copyGroup(selectedGroup.value)">content_copy</mat-icon>
+          <mat-icon class="delete" (click)="openDeleteDialog(selectedGroup, 'deleteGroup')">delete</mat-icon>
+        </div>
+        <div class="content-card" *ngIf="!editEnabled">
+          <h2>{{ selectedGroup.get('groupName')?.value }}</h2>
+          <p>{{ selectedGroup.get('groupDesc')?.value || 'Add Description...' }}</p>
+        </div>
+        <div class="content-card" *ngIf="editEnabled" [formGroup]="selectedGroup">
+          <h2>
+            <input type="text" [formControlName]="'groupName'" />
+          </h2>
+          <input type="text" [formControlName]="'groupDesc'" />
+        </div>
+      </div>
+      <div class="drop-content" cdkDropList (cdkDropListDropped)="drop($event)" id="mainFrame">
+        <div *ngFor="let element of formElements.controls; let i = index" [formGroup]="element" cdkDrag class="content-card-container">
+          <div class="element-left-icons" cdkDragHandle>
+            <mat-icon>drag_indicator</mat-icon>
+          </div>
+          <div class="elements" *ngIf="element.get('type')?.value !== 'textarea' && element.get('type')?.value !== 'select'">
+            <div>
+              <span>{{ element.get('name')?.value }}</span>
+              <span *ngIf="element.get('mandatory')?.value" style="color: red; margin-left: 5px;">*</span>
+            </div>
+            <input class="form-elements" [type]="element.get('type')?.value" [placeholder]="element.get('placeholder')?.value"
+              [required]="element.get('mandatory')?.value" [readonly]="element.get('readOnly')?.value">
+          </div>
+          <div class="elements" *ngIf="element.get('type')?.value === 'textarea'">
+            <div>
+              <span>{{ element.get('name')?.value }}</span>
+              <span *ngIf="element.get('mandatory')?.value" style="color: red; margin-left: 5px;">*</span>
+            </div>
+            <textarea class="form-elements" [placeholder]="element.get('placeholder')?.value"></textarea>
+          </div>
+          <div class="elements" *ngIf="element.get('type')?.value === 'select'">
+            <div>
+              <span>{{ element.get('name')?.value }}</span>
+              <span *ngIf="element.get('mandatory')?.value" style="color: red; margin-left: 5px;">*</span>
+            </div>
+            <select class="form-elements">
+              <option value="" disabled selected>{{ element.get('placeholder')?.value }}</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
+          <div class="element-right-icons">
+            <mat-icon (click)="openElementEditor(element)">mode_edit</mat-icon>
+            <mat-icon (click)="copyElement(element.value)">content_copy</mat-icon>
+            <mat-icon class="delete" (click)="openDeleteDialog(element.value,'deleteElement',i)">delete</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!selectedGroup" style="align-self: center;">
+      <h3>Select a group to add elements</h3>
+    </div>
+    <mat-drawer #rightDrawer opened autosize mode="over" position="end" class="right-pane">
+      <h3 style="margin: 15px;">Form Elements</h3>
+      <div cdkDropList class="elements-container" cdkDropListConnectedTo="mainFrame">
+        <div cdkDrag *ngFor="let element of formElementsList" class="element-item">
+          <div *ngIf="element.icon" class="element-type-icon">
+            <img [src]="element.icon" [alt]="element.icon">
+          </div>
+          {{ element.name }}
+        </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer #elementEditorDrawer autosize mode="over" position="end" class="right-editor">
+      <h3 class="element-header">Element Editor <span (click)="closeEditor()">x</span></h3>
+      <div *ngIf="selectedElement" class="editor-container" [formGroup]="selectedElement">
+        <div class="editor-fields">
+          <label for="fieldName">Field Name :</label>
+          <input type="text" formControlName="name" class="text-input">
+        </div>
+        <div class="editor-fields">
+          <label for="placeHolder">Placeholder :</label>
+          <input type="text" formControlName="placeholder" class="text-input">
+        </div>
+        <div class="checkbox">
+          <label for="mandatory">Mandatory :</label>
+          <input type="checkbox" formControlName="mandatory">
+        </div>
+        <div class="checkbox">
+          <label for="readOnly">Read Only :</label>
+          <input type="checkbox" formControlName="readOnly">
+        </div>
+      </div>
+    </mat-drawer>
+  </div>
+  <div class="main-frame previewMode" *ngIf="isPreviewMode">
+    <app-left-pane class="left-pane"></app-left-pane>
+  <div class="content" *ngIf="selectedGroup">
+    <div class="group-content">
+      <div class="content-card">
+        <h2>{{ selectedGroup.get('groupName')?.value }}</h2>
+        <p>{{ selectedGroup.get('groupDesc')?.value}}</p>
+      </div>
+      <div class="drop-content" id="mainFrame">
+        <div *ngFor="let element of formElements.controls; let i = index" [formGroup]="element" style="width: 50%;">
+          <div class="elements" *ngIf="element.get('type')?.value !== 'textarea' && element.get('type')?.value !== 'select'">
+            <div>
+              <span>{{ element.get('name')?.value }}</span>
+              <span *ngIf="element.get('mandatory')?.value" style="color: red; margin-left: 5px;">*</span>
+            </div>
+            <input class="form-elements" [type]="element.get('type')?.value" [placeholder]="element.get('placeholder')?.value"
+              [required]="element.get('mandatory')?.value" [readonly]="element.get('readOnly')?.value">
+          </div>
+          <div class="elements" *ngIf="element.get('type')?.value === 'textarea'">
+            <div>
+              <span>{{ element.get('name')?.value }}</span>
+              <span *ngIf="element.get('mandatory')?.value" style="color: red; margin-left: 5px;">*</span>
+            </div>
+            <textarea class="form-elements" [placeholder]="element.get('placeholder')?.value"></textarea>
+          </div>
+          <div class="elements" *ngIf="element.get('type')?.value === 'select'">
+            <div>
+              <span>{{ element.get('name')?.value }}</span>
+              <span *ngIf="element.get('mandatory')?.value" style="color: red; margin-left: 5px;">*</span>
+            </div>
+            <select class="form-elements">
+              <option value="" disabled selected>{{ element.get('placeholder')?.value }}</option>
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-drawer #rightDrawer opened autosize mode="over" position="end" class="right-pane">
+    <h3 style="margin: 15px;">Form Elements</h3>
+    <div class="elements-container">
+      <div *ngFor="let element of formElementsList" class="element-item" style="cursor: not-allowed;">
+        <div *ngIf="element.icon" class="element-type-icon">
+          <img [src]="element.icon" [alt]="element.icon">
+        </div>
+        {{ element.name }}
+      </div>
+    </div>
+  </mat-drawer>
+  </div>
 </div>
